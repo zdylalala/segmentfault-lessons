@@ -276,6 +276,11 @@ public class DiscoveryClientController {
 ```
 
 
+zdy : EurekaClient的相关配置在EurekaClientConfigBean 中,有两个比较关键:
+registryFetchIntervalSeconds 拿其他服务的间隔，默认30秒
+instanceInfoReplicationIntervalSeconds 同步自己信息间隔，默认30秒
+
+
 
 
 
