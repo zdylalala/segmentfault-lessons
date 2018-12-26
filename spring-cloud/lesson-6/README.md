@@ -61,7 +61,9 @@ application.properties
 
 ```properties
 ### 配置ribbon 服务地提供方
+// spring-cloud-service-provider 就是服务名
 spring-cloud-service-provider.ribbon.listOfServers = \
+// 这两个值就是配置文件里面的，可以配数组
   http://${serivce-provider.host}:${serivce-provider.port}
 ```
 
@@ -76,6 +78,9 @@ spring-cloud-service-provider.ribbon.listOfServers = \
 public RestTemplate restTemplate(){
     return new RestTemplate();
 }
+
+// 后面的restTemplte 调用就直接根据服务名来，它会从你配置的那个数组里面去取
+// 其实原理就是resTemplate的 ClientHttpRequestInterceptor  ，实现类叫 LoadBalancerInterceptor
 ```
 
 
