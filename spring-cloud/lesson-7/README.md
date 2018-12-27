@@ -426,6 +426,19 @@ user-service-provider.ribbon.NFLoadBalancerPingClassName = \
 ```
 
 
+zdy : 
+RibbonClientConfiguration : 
+ 	@Bean
+	@ConditionalOnMissingBean // 检测是否已经有bean
+	public IRule ribbonRule(IClientConfig config) {
+   // 其实就是这行代码进去了，就不再注入框架提供的bean了
+		if (this.propertiesFactory.isSet(IRule.class, name)) {
+			return this.propertiesFactory.get(IRule.class, config, name);
+		}
+		ZoneAvoidanceRule rule = new ZoneAvoidanceRule();
+		rule.initWithNiwsConfig(config);
+		return rule;
+	}
 
 
 
