@@ -427,6 +427,7 @@ user-service-provider.ribbon.NFLoadBalancerPingClassName = \
 
 
 zdy : 
+```java
 RibbonClientConfiguration : 
  	@Bean
 	@ConditionalOnMissingBean // 检测是否已经有bean
@@ -439,16 +440,18 @@ RibbonClientConfiguration :
 		rule.initWithNiwsConfig(config);
 		return rule;
 	}
-
+```
 
 
 为什么加了@LoadBanlance的RestTemplate有那些功能？可以本地负载均衡，讲服务名转换为实际的地址: 
 LoadbalanceAutoConfiguration : 
+```java
 //拿到所有加了这个注解的bean
 @LoadBalanced
 @Autowired(required = false)
 private List<RestTemplate> restTemplates = Collections.emptyList();
-	
+```
+
 后面为RestTemplate加了 LoadBalancerInterceptor  
 这个LoadBalancerInterceptor就做了LoadbanlanceClient的choose，execute等事。
 
